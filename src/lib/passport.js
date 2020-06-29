@@ -78,7 +78,8 @@ passport.use('estudiante.registro', new LocalStrategy({
         apellidoUsuario: estudiante.apellidosEstudiante,
         fechaRegistro,
         claveUsuario: password,
-        fechaNacimiento: date
+        fechaNacimiento: date,
+        fkIdImg:61
       };
 
       //Registrar Usuario
@@ -92,8 +93,7 @@ passport.use('estudiante.registro', new LocalStrategy({
         estaEnPracticas: 0,
         semestreEstudiante: 9,
         fkIdUsuario: idUsuario,
-        correoInstitucional: email,
-        fkIdImg:61
+        correoInstitucional: email
       };
       //Registrar Estudiante
       await pool.query("INSERT INTO estudiante SET ?", [newEstudiante]);
