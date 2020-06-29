@@ -81,10 +81,11 @@ passport.use('estudiante.registro', new LocalStrategy({
         fechaNacimiento: date,
         fkIdImg:61
       };
+      const estu=61;
 
       //Registrar Usuario
-      const resultUsuario = await pool.query('INSERT INTO usuario (claveUsuario,cedulaUsuario,nombreUsuario,apellidoUsuario,fechaRegistro,fechaNacimiento,fkIdImg) VALUES (aes_encrypt("' + password + '","' + password + '"),?,?,?,?,?) ',
-        [dni, estudiante.nombresEstudiante, estudiante.apellidosEstudiante, fechaRegistro, date,61]);
+      const resultUsuario = await pool.query('INSERT INTO usuario (claveUsuario,cedulaUsuario,nombreUsuario,apellidoUsuario,fechaRegistro,fechaNacimiento,fkIdImg) VALUES (aes_encrypt("' + password + '","' + password + '"),?,?,?,?,?,?) ',
+        [dni, estudiante.nombresEstudiante, estudiante.apellidosEstudiante, fechaRegistro, date,estu]);
 
       //Crear Estudiante
       const idUsuario = resultUsuario.insertId;
@@ -94,6 +95,7 @@ passport.use('estudiante.registro', new LocalStrategy({
         semestreEstudiante: 9,
         fkIdUsuario: idUsuario,
         correoInstitucional: email
+       
       };
       //Registrar Estudiante
       await pool.query("INSERT INTO estudiante SET ?", [newEstudiante]);
